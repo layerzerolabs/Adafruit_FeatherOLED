@@ -91,6 +91,23 @@ void loop()
 
   }
 
+#elif defined(ESP32)
+
+  // esp32 feather
+  #define VBATPIN A13
+
+  float getBatteryVoltage() {
+
+    float measuredvbat = analogRead(VBATPIN);
+
+    measuredvbat *= 2;    // we divided by 2, so multiply back
+    measuredvbat *= 3.3;  // Multiply by 3.3V, our reference voltage
+    measuredvbat /= 4096; // convert to voltage
+
+    return measuredvbat;
+
+  }
+
 #elif defined(ARDUINO_STM32_FEATHER)
 
   // wiced feather
